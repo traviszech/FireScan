@@ -26,7 +26,6 @@ func (e *MasscanEngine) Scan(cfg *config.Config) (*ScanResult, error) {
 		Engine:    "masscan",
 	}
 
-
 	tmpFile, err := os.CreateTemp("", "firescan-*.txt")
 	if err != nil {
 		return nil, fmt.Errorf("temp file: %w", err)
@@ -80,7 +79,6 @@ func (e *MasscanEngine) Scan(cfg *config.Config) (*ScanResult, error) {
 	result.EndTime = time.Now().Format(time.RFC3339)
 	result.DurationSec = time.Since(startTime).Seconds()
 	result.Duration = fmt.Sprintf("%.1fs", result.DurationSec)
-
 
 	return result, nil
 }

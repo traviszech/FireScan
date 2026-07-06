@@ -9,8 +9,8 @@ import (
 )
 
 var (
-	hostRegex = regexp.MustCompile(`(?s)<host[^>]*>(.*?)</host>`)
-	portRegex = regexp.MustCompile(`(?s)<port protocol="([^"]+)" portid="(\d+)">(.*?)</port>`)
+	hostRegex   = regexp.MustCompile(`(?s)<host[^>]*>(.*?)</host>`)
+	portRegex   = regexp.MustCompile(`(?s)<port protocol="([^"]+)" portid="(\d+)">(.*?)</port>`)
 	scriptRegex = regexp.MustCompile(`(?s)<script id="([^"]+)"[^>]*output="([^"]*)"`)
 )
 
