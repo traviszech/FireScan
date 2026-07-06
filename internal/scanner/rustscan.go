@@ -28,7 +28,6 @@ func (e *RustScanEngine) Scan(cfg *config.Config) (*ScanResult, error) {
 
 	startTime := time.Now()
 
-
 	args := []string{
 		"-a", cfg.Target,
 		"-p", cfg.Ports,
@@ -67,7 +66,6 @@ func (e *RustScanEngine) Scan(cfg *config.Config) (*ScanResult, error) {
 			openPorts[port] = true
 		}
 	}
-
 
 	// Try Nmap for service detection if available
 	if cfg.ServiceDetect && len(openPorts) > 0 {
@@ -122,8 +120,6 @@ func (e *RustScanEngine) Scan(cfg *config.Config) (*ScanResult, error) {
 	result.EndTime = time.Now().Format(time.RFC3339)
 	result.DurationSec = time.Since(startTime).Seconds()
 	result.Duration = fmt.Sprintf("%.1fs", result.DurationSec)
-
-
 
 	return result, nil
 }

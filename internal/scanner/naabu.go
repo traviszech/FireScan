@@ -28,7 +28,6 @@ func (e *NaabuEngine) Scan(cfg *config.Config) (*ScanResult, error) {
 
 	startTime := time.Now()
 
-
 	args := []string{
 		"-host", cfg.Target,
 		"-p", cfg.Ports,
@@ -81,7 +80,6 @@ func (e *NaabuEngine) Scan(cfg *config.Config) (*ScanResult, error) {
 	result.EndTime = time.Now().Format(time.RFC3339)
 	result.DurationSec = time.Since(startTime).Seconds()
 	result.Duration = fmt.Sprintf("%.1fs", result.DurationSec)
-
 
 	return result, nil
 }

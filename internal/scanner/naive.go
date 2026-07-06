@@ -32,7 +32,6 @@ func (e *NaiveEngine) Scan(cfg *config.Config) (*ScanResult, error) {
 		return nil, fmt.Errorf("no ports selected")
 	}
 
-
 	startTime := time.Now()
 	host := HostResult{IP: cfg.Target, Status: "up"}
 
@@ -47,17 +46,17 @@ func (e *NaiveEngine) Scan(cfg *config.Config) (*ScanResult, error) {
 		ticker := time.NewTicker(3 * time.Second)
 		defer ticker.Stop()
 		for {
-		select {
-		case <-ticker.C:
-			s := atomic.LoadInt32(&scanned)
-			pct := float64(s) * 100 / float64(total)
-			if !cfg.Quiet {
-				fmt.Printf("  scanning %d/%d (%.1f%%)\r", s, total, pct)
+			select {
+			case <-ticker.C:
+				s := atomic.LoadInt32(&scanned)
+				pct := float64(s) * 100 / float64(total)
+				if !cfg.Quiet {
+					fmt.Printf("  scanning %d/%d (%.1f%%)\r", s, total, pct)
+				}
+			case <-done:
+				return
 			}
-		case <-done:
-			return
 		}
-	}
 	}()
 
 	for i := 0; i < cfg.Threads; i++ {
@@ -95,7 +94,6 @@ func (e *NaiveEngine) Scan(cfg *config.Config) (*ScanResult, error) {
 	result.EndTime = time.Now().Format(time.RFC3339)
 	result.DurationSec = time.Since(startTime).Seconds()
 	result.Duration = fmt.Sprintf("%.1fs", result.DurationSec)
-
 
 	return result, nil
 }
